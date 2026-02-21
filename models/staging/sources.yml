@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: AwsDataCatalog
+    schema: jlf_bronze
+    tables:
+      - name: bronze_checkouts_raw
+        description: "Raw checkout and checkin events from S3 Bronze layer"

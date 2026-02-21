@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fact_sessions
+    description: "One row per completed reading session, deduplicated"
+    columns:
+      - name: session_id
+        tests:
+          - unique
+          - not_null
+      - name: child_id
+        tests:
+          - not_null
+      - name: minutes_read
+        tests:
+          - not_null
+      - name: checked_out_at
+        tests:
+          - not_null
+      - name: checked_in_at
+        tests:
+          - not_null
+
+  - name: dim_books
+    description: "OOne row per unique book - lookup dimension"
+    columns:
+      - name: book_genre
+        tests:
+          - not_null
+      - name: book_title
+        tests:
+          - not_null
+      - name: book_key
+        tests:
+          - not_null
+          - unique
+
+
+  - name: fact_session_books
+    description: "One row per book per session - bridge between fact_sessions and dim_books"
+    columns:
+      - name: session_id
+        tests:
+          - not_null
+      - name: book_key
+        tests:
+          - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - session_id
+              - book_key

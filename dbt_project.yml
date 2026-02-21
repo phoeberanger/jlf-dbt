@@ -1,0 +1,15 @@
+name: 'jlf_silver'
+version: '1.0.0'
+config-version: 2
+
+profile: 'jlf_silver'
+
+model-paths: ["models"]
+test-paths: ["tests"]
+
+models:
+  jlf_silver:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
