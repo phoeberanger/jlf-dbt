@@ -4,6 +4,10 @@ sources:
   - name: bronze
     database: AwsDataCatalog
     schema: jlf_bronze
+    freshness:
+      warn_after: {count: 1, period: day}
+      error_after: {count: 2, period: day}
+    loaded_at_field: "cast(dt as date)"
     tables:
       - name: bronze_checkouts_raw
         description: "Raw checkout and checkin events from S3 Bronze layer"
