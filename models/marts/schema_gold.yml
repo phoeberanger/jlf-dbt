@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: fct_monthly_scores
+    description: "One row per child per month with weighted scoring components"
+    columns:
+      - name: child_id
+        tests:
+          - not_null
+      - name: parish
+        tests:
+          - not_null
+      - name: total_score
+        tests:
+          - not_null
+      - name: score_month
+        tests:
+          - not_null
+
+  - name: fct_monthly_rankings
+    description: "One row per child per month with parish and age bracket rankings"
+    columns:
+      - name: child_id
+        tests:
+          - not_null
+      - name: parish
+        tests:
+          - not_null
+      - name: age_bracket
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Primary', 'Secondary', 'Unknown']
+      - name: parish_rank
+        tests:
+          - not_null
+      - name: repeat_eligible
+        tests:
+          - not_null
+      - name: total_score
+        tests:
+          - not_null

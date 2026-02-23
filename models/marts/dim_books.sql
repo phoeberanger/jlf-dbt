@@ -2,7 +2,7 @@
   config(
     materialized='table',
     format='parquet',
-    s3_data_dir='s3://jlf-athena-results-dev/dbt/marts/'
+    s3_data_dir='s3://jlf-data-silver-dev/dbt/marts/'
   )
 }}
 

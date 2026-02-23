@@ -1,6 +1,6 @@
 {{ config(materialized='table',
           format='parquet',
-          s3_data_dir='s3://jlf-athena-results-dev/dbt/marts/',
+          s3_data_dir='s3://jlf-data-gold-dev/dbt/marts/jlf_gold/',
           partitioned_by=['score_month']) }}
 
 with scores as (
@@ -14,11 +14,11 @@ bracketed as (
             when cast(date_of_birth as date) is null then 'Unknown'
             when date_diff('year',
                 cast(date_of_birth as date),
-                cast(date_trunc('month', score_month) as date)) < 10 then 'Junior'
+                cast(date_trunc('month', score_month) as date)) < 6 then null
             when date_diff('year',
                 cast(date_of_birth as date),
-                cast(date_trunc('month', score_month) as date)) <= 12 then 'Intermediate'
-            else 'Senior'
+                cast(date_trunc('month', score_month) as date)) <= 11 then 'Primary'
+            else 'Secondary'
         end as age_bracket
     from scores s
 ),
@@ -67,6 +67,7 @@ ranked as (
 
     from bracketed b
     left join prior_honorees h on b.child_id = h.child_id
+    where b.age_bracket is not null
 )
 
 select

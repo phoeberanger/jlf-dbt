@@ -1,6 +1,6 @@
 {{ config(materialized='table',
           format='parquet',
-          s3_data_dir='s3://jlf-athena-results-dev/dbt/marts/',
+          s3_data_dir='s3://jlf-data-gold-dev/dbt/marts/jlf_gold/',
           partitioned_by=['score_month']) }}
 
 with metrics as (
