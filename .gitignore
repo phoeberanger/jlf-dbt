@@ -4,3 +4,5 @@ logs/
 .env
 profiles.yml
 .DS_Store
+--*
+EOF
