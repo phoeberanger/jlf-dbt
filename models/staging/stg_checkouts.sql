@@ -23,6 +23,8 @@ typed as (
 
         -- lineage / partition
         payload.client_id                                   as client_id,
+        payload.parish                                      as parish,
+        payload.date_of_birth                               as date_of_birth,
         envelope.source_system                              as source_system,
         envelope.schema_version                             as schema_version,
         dt                                                  as partition_dt
