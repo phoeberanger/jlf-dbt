@@ -1,6 +1,6 @@
 {{ config(materialized='table',
           format='parquet',
-          s3_data_dir='s3://jlf-data-gold-dev/dbt/marts/jlf_gold/',
+          s3_data_dir='s3://jlf-data-gold-dev/dbt/marts/',
           partitioned_by=['score_month']) }}
 
 with scores as (
