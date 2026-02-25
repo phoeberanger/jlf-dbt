@@ -10,7 +10,7 @@ with sessions as (
         s.session_id,
         s.checked_out_at
     from {{ ref('stg_checkouts') }} s
-    left join {{ ref('children_enrichment') }} e on s.child_id = e.child_id
+    left join {{ source('bronze', 'children_dim') }} e on s.child_id = e.child_id
     where s.checked_out_at is not null
 ),
 
