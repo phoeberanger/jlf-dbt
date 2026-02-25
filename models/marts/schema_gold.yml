@@ -30,7 +30,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['Primary', 'Secondary', 'Unknown']
+              arguments:
+                values: ['Primary', 'Secondary', 'Unknown']
       - name: parish_rank
         tests:
           - not_null
