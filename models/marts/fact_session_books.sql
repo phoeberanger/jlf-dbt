@@ -21,7 +21,7 @@ exploded as (
         s.is_auto_checkout,
         s.partition_dt,
         to_hex(md5(to_utf8(lower(coalesce(nullif(trim(b.book_title), ''), 'unknown'))))) as book_key,
-        coalesce(b.notes, b.librarian_notes) as notes
+        b.notes as notes
     from sessions s
     cross join unnest(s.books) as t(b)
     where nullif(trim(b.book_title), '') is not null
