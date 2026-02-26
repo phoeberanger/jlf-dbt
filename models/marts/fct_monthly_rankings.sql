@@ -24,10 +24,13 @@ bracketed as (
 ),
 
 prior_honorees as (
+    -- Reads from live S3 source written by approver Lambda on each approval.
+    -- Replaces static monthly_honorees_history seed to ensure repeat-prevention
+    -- reflects actual honoree history without manual CSV updates.
     select
         cast(child_id as varchar) as child_id,
-        cast(cast(score_month as varchar) as date) as honoree_month
-    from {{ ref('monthly_honorees_history') }}
+        cast(score_month as date) as honoree_month
+    from {{ source('bronze', 'monthly_honorees') }}
 ),
 
 ranked as (

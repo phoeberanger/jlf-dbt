@@ -13,3 +13,5 @@ sources:
         description: "Raw checkout and checkin events from S3 Bronze layer"
       - name: children_dim
         description: "Child dimension written by Lambda on registration. One JSON file per child."
+      - name: monthly_honorees
+        description: "Honoree history written by approver Lambda on each approval. One JSON file per honoree per month. Used by fct_monthly_rankings for repeat-prevention logic instead of static seed."
