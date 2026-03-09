@@ -66,7 +66,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['SPIKE', 'SILENCE', 'CHILD_CONCENTRATION']
+              arguments:
+                values: ['SPIKE', 'SILENCE', 'CHILD_CONCENTRATION']
       - name: notes
         tests:
           - not_null
