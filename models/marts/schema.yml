@@ -51,3 +51,22 @@ models:
             combination_of_columns:
               - session_id
               - book_key
+
+  - name: rpt_anomaly_detection
+    description: >
+      Flags unusual session activity: SPIKE (3x 28-day average), SILENCE (active branch with zero sessions), CHILD_CONCENTRATION (one child 50%+ of sessions).
+    columns:
+      - name: partition_dt
+        tests:
+          - not_null
+      - name: branch_id
+        tests:
+          - not_null
+      - name: flag_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['SPIKE', 'SILENCE', 'CHILD_CONCENTRATION']
+      - name: notes
+        tests:
+          - not_null
