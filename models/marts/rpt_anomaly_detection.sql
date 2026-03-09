@@ -125,7 +125,7 @@ active_branches as (
         branch_name,
         parish
     from daily_counts
-    where partition_dt >= date_add('day', -28, current_date)
+    where partition_dt >= cast(date_format(date_add('day', -28, current_date), '%Y-%m-%d') as varchar)
 ),
 
 silence_candidates as (
@@ -164,7 +164,7 @@ silence as (
         and sc.branch_id    = dc.branch_id
     where dc.branch_id is null
       -- only flag recent silences to avoid noise from historical gaps
-      and sc.partition_dt >= date_add('day', -7, current_date)
+      and sc.partition_dt >= cast(date_format(date_add('day', -7, current_date), '%Y-%m-%d') as varchar)
 ),
 
 -- Signal 3: child concentration
@@ -248,6 +248,6 @@ select
     top_child_sessions,
     top_child_pct,
     notes,
-    current_timestamp as flagged_at
+    cast(date_format(now(), '%Y-%m-%d %H:%i:%s') as varchar) as flagged_at
 from all_flags
 order by partition_dt desc, flag_type, branch_name
